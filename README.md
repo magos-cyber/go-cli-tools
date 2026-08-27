@@ -2,30 +2,30 @@
 
 Production-ready Go CLI tools for managing homelab infrastructure — Proxmox VE, Docker, Kubernetes, Helm, Vault, Consul, and network diagnostics.
 
-## 📁 Structure
+## [FOLDER] Structure
 
 ```
 go-cli-tools/
-├── cmd/
-│   ├── proxmox-cli/       # Proxmox VE management CLI
-│   ├── docker-compose/    # Docker Compose stack manager
-│   ├── net-diag/          # Network diagnostics tool
-│   ├── k8s-deploy/        # Kubernetes deployment manager
-│   ├── helm-cli/          # Helm chart manager
-│   ├── vault-cli/         # HashiCorp Vault client
-│   └── consul-cli/        # Consul service discovery client
-├── .github/
-│   └── workflows/
-│       ├── release.yml    # Build & release binaries
-│       └── docker.yml     # Build & push Docker image
-├── go.mod
-├── go.sum
-├── Dockerfile
-├── Makefile
-└── LICENSE
++-- cmd/
+|   +-- proxmox-cli/       # Proxmox VE management CLI
+|   +-- docker-compose/    # Docker Compose stack manager
+|   +-- net-diag/          # Network diagnostics tool
+|   +-- k8s-deploy/        # Kubernetes deployment manager
+|   +-- helm-cli/          # Helm chart manager
+|   +-- vault-cli/         # HashiCorp Vault client
+|   `-- consul-cli/        # Consul service discovery client
++-- .github/
+|   `-- workflows/
+|       +-- release.yml    # Build & release binaries
+|       `-- docker.yml     # Build & push Docker image
++-- go.mod
++-- go.sum
++-- Dockerfile
++-- Makefile
+`-- LICENSE
 ```
 
-## 🚀 Quick Start
+## [ROCKET] Quick Start
 
 ### Pre-built binaries
 ```bash
@@ -45,7 +45,7 @@ cd go-cli-tools
 make build
 ```
 
-## 📝 Tools
+## [MEMO] Tools
 
 ### proxmox-cli
 ```bash
@@ -102,7 +102,7 @@ make build
 ./consul-cli list
 ```
 
-## 🔧 Configuration
+## [WRENCH] Configuration
 
 | Variable | Description | Default |
 |----------|-------------|---------|
@@ -111,7 +111,7 @@ make build
 | `PVE_SECRET` | Proxmox API secret | - |
 | `DOCKER_STACKS_DIR` | Docker stacks directory | `/opt/stacks` |
 
-## 📦 Packages
+## [PACKAGE] Packages
 
 Docker images are published to GitHub Container Registry:
 
@@ -124,6 +124,6 @@ Tags:
 - `:v1.0.0` — versioned releases
 - `:sha-abc1234` — commit-specific builds
 
-## 📄 License
+## [PAGE] License
 
 MIT License - see [LICENSE](LICENSE) for details.
