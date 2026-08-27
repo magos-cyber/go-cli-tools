@@ -15,7 +15,7 @@ func main() {
 	syncDst := syncCmd.String("destination", "", "Destination directory")
 
 	hashCmd := flag.NewFlagSet("hash", flag.ExitOnError)
-	hashFile := hashCmd.String("file", "", "File to hash")
+	hashFilePath := hashCmd.String("file", "", "File to hash")
 
 	if len(os.Args) < 2 {
 		fmt.Println("Usage: config-sync <command> [arguments]")
@@ -33,11 +33,11 @@ func main() {
 		syncDirs(*syncSrc, *syncDst)
 	case "hash":
 		hashCmd.Parse(os.Args[2:])
-		if *hashFile == "" {
+		if *hashFilePath == "" {
 			fmt.Println("Error: --file is required")
 			os.Exit(1)
 		}
-		hashFile(*hashFile)
+		computeFileHash(*hashFilePath)
 	default:
 		fmt.Printf("Unknown command: %s\n", os.Args[1])
 		os.Exit(1)
@@ -58,7 +58,7 @@ func fileHash(path string) string {
 	return fmt.Sprintf("%x", h.Sum(nil))
 }
 
-func hashFile(path string) {
+func computeFileHash(path string) {
 	hash := fileHash(path)
 	if hash == "" {
 		fmt.Printf("Error hashing %s\n", path)
