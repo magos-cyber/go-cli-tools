@@ -10,11 +10,11 @@ import (
 )
 
 type CertInfo struct {
-	Hostname  string ` + "`json:"hostname"`" + `
-	Issuer    string ` + "`json:"issuer"`" + `
-	Expires   string ` + "`json:"expires"`" + `
-	DaysLeft  int    ` + "`json:"days_left"`" + `
-	Status    string ` + "`json:"status"`" + `
+	Hostname  string
+	Issuer    string
+	Expires   string
+	DaysLeft  int
+	Status    string
 }
 
 func main() {
