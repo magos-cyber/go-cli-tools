@@ -10,7 +10,7 @@ import (
 
 func main() {
 	checkCmd := flag.NewFlagSet("check", flag.ExitOnError)
-	checkService := checkCmd.String("service", "", "Service name")
+	checkServiceName := checkCmd.String("service", "", "Service name")
 
 	listCmd := flag.NewFlagSet("list", flag.ExitOnError)
 	listAll := listCmd.Bool("all", false, "List all services")
@@ -24,11 +24,11 @@ func main() {
 	switch os.Args[1] {
 	case "check":
 		checkCmd.Parse(os.Args[2:])
-		if *checkService == "" {
+		if *checkServiceName == "" {
 			fmt.Println("Error: --service is required")
 			os.Exit(1)
 		}
-		checkService(*checkService)
+		doCheckService(*checkServiceName)
 	case "list":
 		listCmd.Parse(os.Args[2:])
 		listServices(*listAll)
@@ -38,10 +38,16 @@ func main() {
 	}
 }
 
-func checkService(name string) {
+func doCheckService(name string) {
 	cmd := exec.Command("systemctl", "is-active", name)
-	output, _ := cmd.Output()
+	output, err := cmd.Output()
 	status := strings.TrimSpace(string(output))
+
+	if err != nil {
+		fmt.Printf("Service %s: %s\n", name, status)
+		os.Exit(1)
+	}
+
 	fmt.Printf("Service %s: %s\n", name, status)
 }
 
@@ -51,7 +57,12 @@ func listServices(all bool) {
 		args = append(args, "--state=running")
 	}
 	cmd := exec.Command("systemctl", args...)
-	output, _ := cmd.Output()
+	output, err := cmd.Output()
+	if err != nil {
+		fmt.Printf("Error: %v\n", err)
+		os.Exit(1)
+	}
+
 	lines := strings.Split(string(output), "\n")
 	for _, line := range lines {
 		if line != "" {
