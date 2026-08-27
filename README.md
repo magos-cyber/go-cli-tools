@@ -2,22 +2,22 @@
 
 Production-ready Go CLI tools for managing homelab infrastructure — Proxmox VE, Docker, Kubernetes, Helm, Vault, Consul, and network diagnostics.
 
-## [FOLDER] Structure
+## Structure
 
 ```
 go-cli-tools/
 +-- cmd/
-|   +-- proxmox-cli/       # Proxmox VE management CLI
-|   +-- docker-compose/    # Docker Compose stack manager
-|   +-- net-diag/          # Network diagnostics tool
-|   +-- k8s-deploy/        # Kubernetes deployment manager
-|   +-- helm-cli/          # Helm chart manager
-|   +-- vault-cli/         # HashiCorp Vault client
-|   `-- consul-cli/        # Consul service discovery client
+| +-- proxmox-cli/ # Proxmox VE management CLI
+| +-- docker-compose/ # Docker Compose stack manager
+| +-- net-diag/ # Network diagnostics tool
+| +-- k8s-deploy/ # Kubernetes deployment manager
+| +-- helm-cli/ # Helm chart manager
+| +-- vault-cli/ # HashiCorp Vault client
+| `-- consul-cli/ # Consul service discovery client
 +-- .github/
-|   `-- workflows/
-|       +-- release.yml    # Build & release binaries
-|       `-- docker.yml     # Build & push Docker image
+| `-- workflows/
+| +-- release.yml # Build & release binaries
+| `-- docker.yml # Build & push Docker image
 +-- go.mod
 +-- go.sum
 +-- Dockerfile
@@ -25,7 +25,7 @@ go-cli-tools/
 `-- LICENSE
 ```
 
-## [ROCKET] Quick Start
+## Quick Start
 
 ### Pre-built binaries
 ```bash
@@ -45,7 +45,7 @@ cd go-cli-tools
 make build
 ```
 
-## [MEMO] Tools
+## Tools
 
 ### proxmox-cli
 ```bash
@@ -102,7 +102,7 @@ make build
 ./consul-cli list
 ```
 
-## [WRENCH] Configuration
+## Configuration
 
 | Variable | Description | Default |
 |----------|-------------|---------|
@@ -111,7 +111,7 @@ make build
 | `PVE_SECRET` | Proxmox API secret | - |
 | `DOCKER_STACKS_DIR` | Docker stacks directory | `/opt/stacks` |
 
-## [PACKAGE] Packages
+## Packages
 
 Docker images are published to GitHub Container Registry:
 
@@ -124,6 +124,6 @@ Tags:
 - `:v1.0.0` — versioned releases
 - `:sha-abc1234` — commit-specific builds
 
-## [PAGE] License
+## License
 
-MIT License - see [LICENSE](LICENSE) for details.
+MIT License - see (LICENSE) for details.
