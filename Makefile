@@ -1,21 +1,29 @@
-.PHONY: all build proxmox-cli docker-compose net-diag clean
+.PHONY: all build test vet clean install
+
+TOOLS := proxmox-cli docker-compose net-diag k8s-deploy helm-cli vault-cli consul-cli
 
 all: build
 
-build: proxmox-cli docker-compose net-diag
+build: $(TOOLS)
 
-proxmox-cli:
-	@echo "Building proxmox-cli..."
-	go build -o bin/proxmox-cli ./cmd/proxmox-cli
+$(TOOLS):
+	@echo "Building $@..."
+	go build -o bin/$@ ./cmd/$@
 
-docker-compose:
-	@echo "Building docker-compose..."
-	go build -o bin/docker-compose ./cmd/docker-compose
+test:
+	go test ./...
 
-net-diag:
-	@echo "Building net-diag..."
-	go build -o bin/net-diag ./cmd/net-diag
+vet:
+	go vet ./...
 
 clean:
-	@echo "Cleaning binaries..."
-	rm -rf bin/
+	rm -rf bin/ release/
+
+install: build
+	@echo "Installing tools to $(GOPATH)/bin..."
+	for tool in $(TOOLS); do \
+		cp bin/$$tool $(GOPATH)/bin/; \
+	done
+	@echo "All tools installed to $(GOPATH)/bin"
+
+.DEFAULT_GOAL := build
