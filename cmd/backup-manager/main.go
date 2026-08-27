@@ -16,7 +16,7 @@ func main() {
 	createName := createCmd.String("name", "", "Backup name (optional)")
 
 	listCmd := flag.NewFlagSet("list", flag.ExitOnError)
-	listDir := flag.NewFlagSet("list", flag.ExitOnError)
+	listDir := listCmd.String("dir", ".", "Directory to list backups")
 
 	restoreCmd := flag.NewFlagSet("restore", flag.ExitOnError)
 	restoreFile := restoreCmd.String("file", "", "Backup file to restore")
@@ -37,8 +37,8 @@ func main() {
 		}
 		createBackup(*createSource, *createDest, *createName)
 	case "list":
-		listDir.Parse(os.Args[2:])
-		listBackups(*listDir.String())
+		listCmd.Parse(os.Args[2:])
+		listBackups(*listDir)
 	case "restore":
 		restoreCmd.Parse(os.Args[2:])
 		if *restoreFile == "" || *restoreDest == "" {
