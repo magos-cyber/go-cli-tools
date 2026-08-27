@@ -73,17 +73,14 @@ make sys-mon
 
 ### net-diag
 ```bash
-# Full network diagnostics
+# Full network diagnostics (TCP connectivity + DNS resolution)
 ./net-diag check --target 8.8.8.8
 
-# Port scan common homelab ports
+# Scan common homelab ports (22, 53, 80, 443, 3000, 8006, 8080, 9090, 32400)
 ./net-diag ports --host 192.168.1.1
 
-# DNS resolution test
+# DNS resolution test (A records + CNAME)
 ./net-diag dns --domain example.com
-
-# Bandwidth test
-./net-diag bandwidth --server speedtest.waust.org
 ```
 
 ### sys-mon
