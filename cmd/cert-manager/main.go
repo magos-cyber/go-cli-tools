@@ -2,7 +2,6 @@ package main
 
 import (
 	"crypto/tls"
-	"crypto/x509"
 	"encoding/json"
 	"flag"
 	"fmt"
@@ -11,11 +10,11 @@ import (
 )
 
 type CertInfo struct {
-	Hostname  string    `json:"hostname"`
-	Issuer    string    `json:"issuer"`
-	Expires   string    `json:"expires"`
-	DaysLeft  int       `json:"days_left"`
-	Status    string    `json:"status"`
+	Hostname  string ` + "`json:"hostname"`" + `
+	Issuer    string ` + "`json:"issuer"`" + `
+	Expires   string ` + "`json:"expires"`" + `
+	DaysLeft  int    ` + "`json:"days_left"`" + `
+	Status    string ` + "`json:"status"`" + `
 }
 
 func main() {
@@ -24,7 +23,7 @@ func main() {
 	hostPort := hostCmd.Int("port", 443, "Port to check")
 
 	listCmd := flag.NewFlagSet("list", flag.ExitOnError)
-	listFile := listCmd.String("file", "", "File with hosts (one per line)")
+	listFile := listCmd.String("file", "", "File with hosts")
 
 	if len(os.Args) < 2 {
 		fmt.Println("Usage: cert-manager <command> [arguments]")
@@ -39,7 +38,7 @@ func main() {
 			fmt.Println("Error: --host is required")
 			os.Exit(1)
 		}
-		checkCert(*hostHostname, *hostPort)
+		doCheckCert(*hostHostname, *hostPort)
 	case "list":
 		listCmd.Parse(os.Args[2:])
 		if *listFile == "" {
@@ -53,7 +52,7 @@ func main() {
 	}
 }
 
-func checkCert(hostname string, port int) {
+func doCheckCert(hostname string, port int) {
 	addr := fmt.Sprintf("%s:%d", hostname, port)
 	conn, err := tls.Dial("tcp", addr, &tls.Config{InsecureSkipVerify: true})
 	if err != nil {
@@ -97,8 +96,6 @@ func listCerts(filename string) {
 		fmt.Printf("Error reading file: %v\n", err)
 		os.Exit(1)
 	}
-
-	// Simple line-by-line parsing
 	_ = data
 	fmt.Println("List certs from file - implement parsing")
 }
